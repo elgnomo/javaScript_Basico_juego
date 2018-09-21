@@ -25,7 +25,7 @@ function imprimirNombreEnMayusculas({ //llaves y los atributos que nos interesan
 }
 
 /*imprimirNombreEnMayusculas(efrain.nombre);
-imprimirNombreEnMayusculas(marvin.nombre);*/
+imprimirNombreEnMayu    sculas(marvin.nombre);*/
 
 imprimirNombreEnMayusculas(efrain);
 imprimirNombreEnMayusculas(marvin);
