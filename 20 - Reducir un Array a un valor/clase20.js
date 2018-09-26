@@ -90,7 +90,11 @@ const reducer = (acum, persona) => {
 }
 */
 
-const reducer = (acum, persona) => acum + persona.cantidadDeLibros
+//const reducer = (acum, persona) => acum + persona.cantidadDeLibros
+const reducer = (acum, {
+    cantidadDeLibros
+}) => acum + cantidadDeLibros
+
 
 var totalDeLibros = personas.reduce(reducer, 0);
 

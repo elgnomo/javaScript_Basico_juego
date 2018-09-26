@@ -59,9 +59,10 @@ var personas = [persona_01, persona_02, persona_03, persona_04, persona_05, pers
 
 // persona.altura = persona.altura * 100
 const pasarAlturaACms = persona => ({
-    ...persona,
+    ...persona, //nuevo objeto
     altura: persona.altura * 100
 })
+//retornar inicia con parentsis 
 
 var personasAltas = personas.filter(esAlta);
 var personasBajas = personas.filter(esBaja)
