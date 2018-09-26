@@ -1,103 +1,62 @@
-var persona_01 = {
-    nombre: 'Efrain',
-    apellido: 'Antonio',
-    altura: 1.61,
-    cantidadDeLibros: 7787
-}
-
-var persona_02 = {
-    nombre: 'Marvin',
-    apellido: 'Huerta',
-    altura: 1.86,
-    cantidadDeLibros: 778
-}
-
-var persona_03 = {
-    nombre: 'Ramon',
-    apellido: 'Ramirez',
-    altura: 1.85,
-    cantidadDeLibros: 77
-}
-
-var persona_04 = {
-    nombre: 'Dario',
-    apellido: 'Juarez',
-    altura: 1.71,
-    cantidadDeLibros: 712312
-}
-
-var persona_05 = {
-    nombre: 'Vicky',
-    apellido: 'Zapata',
-    altura: 1.56,
-    cantidadDeLibros: 773
-}
-
-var persona_06 = {
-    nombre: 'Paula',
-    apellido: 'Barros',
-    altura: 1.76,
-    cantidadDeLibros: 73
-}
-/*
-const esAlta = (persona) => {
-    return persona.altura > 1.8
-}
-*/
-//const esAlta = persona => persona.altura > 1.8;
-//Desglosar
-const esAlta = ({
-    altura
-}) => altura > 1.8;
-
-const esBaja = ({
-    altura
-}) => !esAlta({
-    altura
-}) //RETO
-
-var personas = [persona_01, persona_02, persona_03, persona_04, persona_05, persona_06];
-
-// for (var i = 0; i < personas.length; i++) {
-//     var persona = personas[i]
-//     console.log(`${persona.nombre} mide ${persona.altura}mts`)
-// }
-
-// persona.altura = persona.altura * 100
-const pasarAlturaACms = persona => ({
-    ...persona,
-    altura: persona.altura * 100
-})
-
-var acum = 0;
-
-var personasAltas = personas.filter(esAlta);
-var personasBajas = personas.filter(esBaja)
-/*
-var personasAltas = personas.filter(function (persona) {
-    return persona.altura > 1.8
-})*/
-
-/*
-    for (var i = 0; i < personas.length; i++) {
-        acum = acum + personas[i].cantidadDeLibros;
-    }
+/*Antes muchos lo realizaban de esta manera
+var obj = {};
+obj.nombre = nombre;
+obj.apellido = apellido;
+return obj;
 */
 
 /*
-const reducer = (acum, persona) => {
-    return acum + persona.cantidadDeLibros
-}
+Hablar de objetos en javascript es hablar de prototipos.
+this hace referencia al nuevo objeto que se acaba de crear.
+la función que define al prototipo retorna implícitamente this, es decir retorna el nuevo objeto que se creo.
+La palabra reservada new se utiliza para crear un nuevo objeto con el prototipo indicado.
 */
 
-const reducer = (acum, persona) => acum + persona.cantidadDeLibros
+function heradaDe(prototipoHijo, prototipoPadre) { //prototipo hijo quien es su papa
+    var fn = function () {}
+    fn.prototype = prototipoPadre.prototype
+    prototipoHijo.prototype = new fn
+    prototipoHijo.prototype.constructor = prototipoHijo
+    //var noop
+}
 
-var totalDeLibros = personas.reduce(reducer, 0);
+function Persona(nombre, apellido, altura) {
+    //console.log("Arranca");
+    this.nombre = nombre;
+    this.apellido = apellido;
+    this.altura = altura;
+    //return this;
+};
 
-console.log("personasAltas ", personasAltas);
-console.log("personasBajas ", personasBajas);
-console.log("personasMts: ", personas);
-var personasCms = personas.map(pasarAlturaACms)
-console.log("personasCms: ", personasCms);
-//console.log(`En total todos tienen ${acum} libros`);
-console.log(`En total todos tienen ${totalDeLibros} libros`);
+Persona.prototype.soyAlto = function () {
+    this.altura >= 1.8 ? console.log(`${this.nombre} es alto`) : console.log(`${this.nombre} es bajo`)
+}
+
+Persona.prototype.saludar = function () {
+    console.log(`Hola me llamo ${this.nombre} ${this.apellido}`)
+}
+//Vamos a hacer con arrow function
+//Persona.prototype.soyAlto = () => 1.8 ? console.log(`${this.nombre} es alto`) : console.log(`${this.nombre} es bajo`)
+
+function Desarrollador(nombre, apellido) {
+    this.nombre = nombre;
+    this.apellido = apellido;
+}
+
+Desarrollador.prototype.saludar = function () {
+    console.log(`Hola me llamo ${this.nombre}${this.apellido} y soy desarrollador`)
+}
+heradaDe(Desarrollador, Persona)
+
+var efrain = new Persona('Efrain', 'Antonio', 1.60);
+var marvin = new Persona('Marvin', 'Huerta', 1.80);
+var adriana = new Persona('Adriana', 'Rodriguez', 1.50);
+console.log("efrain: ", efrain);
+console.log("efrainThis: ", Persona());
+efrain.saludar() //Homa me llamo chanito...
+marvin.saludar()
+adriana.saludar()
+efrain.soyAlto() //Homa me llamo chanito...
+marvin.soyAlto()
+adriana.soyAlto()
+//Si no usamos "new" y llamamos con this
