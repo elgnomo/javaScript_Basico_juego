@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Cambiando de contexto al llamar a una funcion</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Practicas Javascript">
+  <meta name="keywords" content="HTML,CSS,XML,JavaScript">
+  <meta name="author" content="Efrain elGnomo">
+</head>
+
+<body>
+  <script>
+    const persona = {
+      nombre: 'efrain',
+      apellido: 'antonio'
+    }
+    const yesika = {
+      nombre: 'marvin',
+      apellido: 'huerta'
+    }
+
+    function saludar(saludo = 'Hola') {
+      console.log(`${saludo}, mi nombre es ${this.nombre}`)
+    }
+    // const saludarApersona = saludar.bind(persona)
+    // const saludarAYesika = saludar.bind(yesika)
+    //
+    // setTimeout(saludar.bind(persona, 'Hola'), 1000)
+    // saludar.call(persona, 'Hola')
+    saludar.apply(sacha, ['Hola']) //el primero es this, el segundo es parametro
+  </script>
+</body>
+
+</html>

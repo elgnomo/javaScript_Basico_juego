@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <title>Agregando los estados finales del juego</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="Practicas Javascript">
+  <meta name="keywords" content="HTML,CSS,XML,JavaScript">
+  <meta name="author" content="Efrain elGnomo">
+</head>
+
+<body>
+  <script>
+    function crearSaludo(finalDeFrase) {
+      return function (nombre) {
+        console.log(`Hola ${nombre} ${finalDeFrase}`)
+      }
+    }
+
+    //const saludar = pais => nombre => console.log(`Hola ${nombre} de ${pais}`);
+
+    const saludoArgentino = crearSaludo('che')
+    const saludoMexicano = crearSaludo('güey')
+    const saludoColombiano = crearSaludo('amigo')
+    saludoArgentino('Efra') // Hola Sacha che
+    saludoMexicano('Efra') // Hola Sacha güey
+    saludoColombiano('Efra') // Hola Sacha amigo
+  </script>
+</body>
+
+</html>
